@@ -1,0 +1,117 @@
+typecode,substitute,origin,basis
+A124,B744,openap,OpenAP 2.6.2 aircraft/_synonym.csv
+A124,B744,openap,OpenAP 2.6.2 dragpolar/_synonym.csv
+A124,B744,thesis_analysis,"OpenAP 2.4's own synonym, no observed flights; kept by the analysis rule: stall margin 1.29, same FAA approach category"
+A178,E190,poll_schumann,pycontrails ps-synonym-list-20250328.csv
+A19N,A20N,openap,OpenAP 2.6.2 dragpolar/_synonym.csv
+A19N,A20N,poll_schumann,pycontrails ps-synonym-list-20250328.csv
+A21N,A20N,openap,OpenAP 2.6.2 dragpolar/_synonym.csv
+A306,A332,openap,OpenAP 2.6.2 aircraft/_synonym.csv
+A306,A332,openap,OpenAP 2.6.2 dragpolar/_synonym.csv
+A310,A318,openap,OpenAP 2.6.2 aircraft/_synonym.csv
+A310,A319,openap,OpenAP 2.6.2 dragpolar/_synonym.csv
+A310,A318,thesis_analysis,"OpenAP 2.4's own synonym, no observed flights; kept by the analysis rule: stall margin 1.43, same FAA approach category"
+A318,A319,openap,OpenAP 2.6.2 dragpolar/_synonym.csv
+ASTR,C550,thesis_analysis,"nearest airframe of the same propulsion class and FAA approach category: similarity distance 0.317 (A320 0.254), stall margin 1.65; the stall margin is outside the native range (accepted and noted, the analysis's rule 6)"
+AT72,E145,openap,OpenAP 2.6.2 aircraft/_synonym.csv
+AT72,E75L,openap,OpenAP 2.6.2 dragpolar/_synonym.csv
+AT75,E145,openap,OpenAP 2.6.2 aircraft/_synonym.csv
+AT75,E75L,openap,OpenAP 2.6.2 dragpolar/_synonym.csv
+AT76,E145,openap,OpenAP 2.6.2 aircraft/_synonym.csv
+AT76,E75L,openap,OpenAP 2.6.2 dragpolar/_synonym.csv
+B37M,B38M,openap,OpenAP 2.6.2 dragpolar/_synonym.csv
+B39M,B38M,openap,OpenAP 2.6.2 dragpolar/_synonym.csv
+B3XM,B38M,openap,OpenAP 2.6.2 dragpolar/_synonym.csv
+B701,B752,poll_schumann,pycontrails ps-synonym-list-20250328.csv
+B720,B752,poll_schumann,pycontrails ps-synonym-list-20250328.csv
+B721,B752,poll_schumann,pycontrails ps-synonym-list-20250328.csv
+B733,B734,openap,OpenAP 2.6.2 aircraft/_synonym.csv
+B733,B734,openap,OpenAP 2.6.2 dragpolar/_synonym.csv
+B735,B734,openap,OpenAP 2.6.2 aircraft/_synonym.csv
+B735,B734,openap,OpenAP 2.6.2 dragpolar/_synonym.csv
+B741,B743,poll_schumann,pycontrails ps-synonym-list-20250328.csv
+B74D,B743,poll_schumann,pycontrails ps-synonym-list-20250328.csv
+B74R,B743,poll_schumann,pycontrails ps-synonym-list-20250328.csv
+B74S,B742,poll_schumann,pycontrails ps-synonym-list-20250328.csv
+B762,B763,openap,OpenAP 2.6.2 aircraft/_synonym.csv
+B762,B752,openap,OpenAP 2.6.2 dragpolar/_synonym.csv
+B763,B752,openap,OpenAP 2.6.2 dragpolar/_synonym.csv
+B773,B77W,openap,OpenAP 2.6.2 dragpolar/_synonym.csv
+B77L,B77W,openap,OpenAP 2.6.2 aircraft/_synonym.csv
+B77L,B77W,openap,OpenAP 2.6.2 dragpolar/_synonym.csv
+BLCF,B77W,poll_schumann,pycontrails ps-synonym-list-20250328.csv
+C141,A310,poll_schumann,pycontrails ps-synonym-list-20250328.csv
+C17,B764,poll_schumann,pycontrails ps-synonym-list-20250328.csv
+C25A,C550,openap,OpenAP 2.6.2 aircraft/_synonym.csv
+C25A,C550,openap,OpenAP 2.6.2 dragpolar/_synonym.csv
+C5,A345,poll_schumann,pycontrails ps-synonym-list-20250328.csv
+C501,C550,thesis_analysis,"nearest airframe of the same propulsion class and FAA approach category: similarity distance 0.152 (A320 0.648), stall margin 1.47"
+C525,C550,openap,OpenAP 2.6.2 aircraft/_synonym.csv
+C525,C550,openap,OpenAP 2.6.2 dragpolar/_synonym.csv
+C56X,C550,openap,OpenAP 2.6.2 aircraft/_synonym.csv
+C56X,C550,openap,OpenAP 2.6.2 dragpolar/_synonym.csv
+C5M,A345,poll_schumann,pycontrails ps-synonym-list-20250328.csv
+C650,E170,thesis_analysis,"nearest airframe of the same propulsion class and FAA approach category: similarity distance 0.035 (A320 0.276), stall margin 1.24"
+C919,A20N,poll_schumann,pycontrails ps-synonym-list-20250328.csv
+CRJ2,E145,openap,OpenAP 2.6.2 aircraft/_synonym.csv
+CRJ2,E75L,openap,OpenAP 2.6.2 dragpolar/_synonym.csv
+CRJ7,CRJ9,poll_schumann,pycontrails ps-synonym-list-20250328.csv
+CRJ9,E75L,openap,OpenAP 2.6.2 aircraft/_synonym.csv
+CRJ9,E75L,openap,OpenAP 2.6.2 dragpolar/_synonym.csv
+DC91,B712,poll_schumann,pycontrails ps-synonym-list-20250328.csv
+E145,E75L,openap,OpenAP 2.6.2 dragpolar/_synonym.csv
+E170,E75L,openap,OpenAP 2.6.2 dragpolar/_synonym.csv
+E290,E190,openap,OpenAP 2.6.2 aircraft/_synonym.csv
+E290,E190,openap,OpenAP 2.6.2 dragpolar/_synonym.csv
+E290,E190,thesis_analysis,"OpenAP 2.4's own synonym, no observed flights; kept by the analysis rule: stall margin 1.22, same FAA approach category"
+E35L,E170,thesis_analysis,"nearest airframe of the same propulsion class and FAA approach category: similarity distance 0.111 (A320 0.422), stall margin 1.22"
+E3CF,B762,poll_schumann,pycontrails ps-synonym-list-20250328.csv
+E3TF,B762,poll_schumann,pycontrails ps-synonym-list-20250328.csv
+E737,B738,poll_schumann,pycontrails ps-synonym-list-20250328.csv
+E767,B763,poll_schumann,pycontrails ps-synonym-list-20250328.csv
+EA50,C550,thesis_analysis,"nearest airframe of the same propulsion class and FAA approach category: similarity distance 0.322 (A320 0.821), stall margin 1.25"
+F900,A19N,thesis_analysis,"nearest airframe of the same propulsion class and FAA approach category: similarity distance 0.05 (A320 0.115), stall margin 1.29"
+G280,E170,thesis_analysis,"nearest airframe of the same propulsion class and FAA approach category: similarity distance 0.068 (A320 0.347), stall margin 1.23"
+GA5C,B737,thesis_analysis,"nearest airframe of the same propulsion class and FAA approach category: similarity distance 0.159 (A320 0.271), stall margin 1.29"
+GA6C,B737,thesis_analysis,"nearest airframe of the same propulsion class and FAA approach category: similarity distance 0.022 (A320 0.182), stall margin 1.26"
+GL5T,GLF6,openap,OpenAP 2.6.2 aircraft/_synonym.csv
+GL5T,GLF6,openap,OpenAP 2.6.2 dragpolar/_synonym.csv
+GL7T,E170,thesis_analysis,"nearest airframe of the same propulsion class and FAA approach category: similarity distance 0.017 (A320 0.295), stall margin 1.23"
+GLF3,B752,thesis_analysis,"nearest airframe of the same propulsion class and FAA approach category: similarity distance 0.082 (A320 0.1), stall margin 1.26"
+GLF4,CRJ9,thesis_analysis,"nearest airframe of the same propulsion class and FAA approach category: similarity distance 0.198 (A320 0.302), stall margin 1.4"
+GLF5,GLF6,openap,OpenAP 2.6.2 aircraft/_synonym.csv
+GLF5,GLF6,openap,OpenAP 2.6.2 dragpolar/_synonym.csv
+GLF5,GLF6,thesis_analysis,"OpenAP 2.4's own synonym, kept by the analysis: stall margin 1.61, same FAA approach category"
+H25A,A319,thesis_analysis,"nearest airframe of the same propulsion class and FAA approach category: similarity distance 0.017 (A320 0.234), stall margin 1.25"
+H25B,GLF6,thesis_analysis,"nearest airframe of the same propulsion class and FAA approach category: similarity distance 0.007 (A320 0.093), stall margin 1.62"
+H25C,B737,thesis_analysis,"nearest airframe of the same propulsion class and FAA approach category: similarity distance 0.045 (A320 0.128), stall margin 1.29"
+HA4T,B737,thesis_analysis,"nearest airframe of the same propulsion class and FAA approach category: similarity distance 0.056 (A320 0.229), stall margin 1.25"
+IL62,A30B,poll_schumann,pycontrails ps-synonym-list-20250328.csv
+J328,E135,poll_schumann,pycontrails ps-synonym-list-20250328.csv
+KC39,A321,poll_schumann,pycontrails ps-synonym-list-20250328.csv
+LJ35,E170,thesis_analysis,"nearest airframe of the same propulsion class and FAA approach category: similarity distance 0.136 (A320 0.319), stall margin 1.26"
+LJ45,GLF6,openap,OpenAP 2.6.2 aircraft/_synonym.csv
+LJ45,GLF6,openap,OpenAP 2.6.2 dragpolar/_synonym.csv
+LJ55,E170,thesis_analysis,"nearest airframe of the same propulsion class and FAA approach category: similarity distance 0.128 (A320 0.406), stall margin 1.23"
+MC23,A20N,poll_schumann,pycontrails ps-synonym-list-20250328.csv
+MD11,B773,openap,OpenAP 2.6.2 aircraft/_synonym.csv
+MD11,B77W,openap,OpenAP 2.6.2 dragpolar/_synonym.csv
+MD11,B773,thesis_analysis,"OpenAP 2.4's own synonym, no observed flights; kept by the analysis rule: stall margin 1.33, same FAA approach category"
+MD81,MD82,poll_schumann,pycontrails ps-synonym-list-20250328.csv
+MD87,MD82,poll_schumann,pycontrails ps-synonym-list-20250328.csv
+MD88,MD82,poll_schumann,pycontrails ps-synonym-list-20250328.csv
+MD88,A19N,thesis_analysis,"nearest airframe of the same propulsion class and FAA approach category: similarity distance 0.036 (A320 0.201), stall margin 1.29"
+MD90,MD83,poll_schumann,pycontrails ps-synonym-list-20250328.csv
+NIM,B738,poll_schumann,pycontrails ps-synonym-list-20250328.csv
+P1,B38M,poll_schumann,pycontrails ps-synonym-list-20250328.csv
+P8,B738,poll_schumann,pycontrails ps-synonym-list-20250328.csv
+PC24,C550,openap,OpenAP 2.6.2 aircraft/_synonym.csv
+PC24,GLF6,openap,OpenAP 2.6.2 dragpolar/_synonym.csv
+R721,B722,poll_schumann,pycontrails ps-synonym-list-20250328.csv
+R722,B722,poll_schumann,pycontrails ps-synonym-list-20250328.csv
+SBR1,E75L,thesis_analysis,"nearest airframe of the same propulsion class and FAA approach category: similarity distance 0.042 (A320 0.195), stall margin 1.23"
+SLCH,A388,poll_schumann,pycontrails ps-synonym-list-20250328.csv
+SU95,E170,openap,OpenAP 2.6.2 aircraft/_synonym.csv
+SU95,E75L,openap,OpenAP 2.6.2 dragpolar/_synonym.csv
+SU95,E170,thesis_analysis,"OpenAP 2.4's own synonym, no observed flights; kept by the analysis rule: stall margin 1.38, same FAA approach category"
+WW24,E75L,thesis_analysis,"nearest airframe of the same propulsion class and FAA approach category: similarity distance 0.051 (A320 0.109), stall margin 1.26"

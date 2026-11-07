@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aircraft Performance Parameters</title>
+<meta name="description" content="Open per-type aircraft parameters for point-mass performance models: mass, geometry, drag polar, lift, thrust and reference speeds, each value with its source.">
+<style>
+:root {
+  --bg: #fbfbf9; --surface: #ffffff; --text: #1d2125; --muted: #5d6670; --line: #e3e5e8;
+  --accent: #1f5fa8; --accent-soft: #e8f0fa; --warn: #8a5300; --warn-soft: #fdf3e2; --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14171a; --surface: #1b1f23; --text: #e6e8ea; --muted: #9aa3ad; --line: #2d3339;
+    --accent: #7fb0ea; --accent-soft: #1f2d3d; --warn: #f0b860; --warn-soft: #33281a;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif; }
+main { max-width: 1040px; margin: 0 auto; padding: 32px 16px 64px; }
+h1 { font-size: 2rem; margin: 0 0 6px; letter-spacing: -0.01em; }
+h2 { font-size: 1.3rem; margin: 44px 0 12px; }
+h3 { font-size: 1rem; margin: 20px 0 8px; }
+p { margin: 0 0 12px; }
+a { color: var(--accent); }
+.lede { color: var(--muted); font-size: 1.08rem; max-width: 760px; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 24px 0 8px; }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+.stat b { display: block; font-size: 1.6rem; font-variant-numeric: tabular-nums; }
+.stat span { color: var(--muted); font-size: .9rem; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px; }
+.note { background: var(--warn-soft); border-left: 3px solid var(--warn); padding: 10px 14px; border-radius: 6px; margin: 12px 0; }
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: .92rem; }
+th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { color: var(--muted); font-weight: 600; font-size: .82rem; text-transform: uppercase; letter-spacing: .03em; }
+td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+code, .mono { font-family: var(--mono); font-size: .88em; }
+.bar { height: 6px; background: var(--line); border-radius: 3px; min-width: 80px; }
+.bar i { display: block; height: 100%; background: var(--accent); border-radius: 3px; }
+.explorer { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 16px; }
+.explorer > * { min-width: 0; }
+@media (max-width: 720px) { .explorer { grid-template-columns: minmax(0, 1fr); } .typelist { max-height: 240px; } }
+#detail td.src { word-break: break-word; }
+input[type=search] { width: 100%; padding: 9px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--text); font: inherit; }
+.typelist { max-height: 460px; overflow-y: auto; margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+.typelist button { display: block; width: 100%; text-align: left; border: 0; border-bottom: 1px solid var(--line); background: none; color: var(--text); padding: 7px 10px; font: inherit; cursor: pointer; }
+.typelist button small { color: var(--muted); display: block; font-size: .78rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.typelist button[aria-current=true] { background: var(--accent-soft); }
+.src { color: var(--muted); font-size: .85rem; }
+.pill { display: inline-block; font-size: .75rem; padding: 1px 7px; border-radius: 99px; background: var(--accent-soft); color: var(--accent); margin-left: 4px; }
+details summary { cursor: pointer; color: var(--accent); font-size: .88rem; }
+.empty { color: var(--muted); }
+ul.tight { margin: 0; padding-left: 20px; }
+footer { margin-top: 56px; color: var(--muted); font-size: .88rem; border-top: 1px solid var(--line); padding-top: 16px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Aircraft Performance Parameters</h1>
+  <p class="lede">Open per-type parameters for point-mass aircraft performance models: mass, geometry, drag polar,
+    landing lift, thrust and reference speeds. Every value carries the document it came from and its licence.
+    Built for terminal-area approach modelling; released under GPL-3.0.</p>
+
+  <div class="stats" id="stats"></div>
+
+  <h2>Downloads</h2>
+  <div class="card">
+    <ul class="tight">
+      <li><a href="downloads/recommended.csv">recommended.csv</a> — one row per aircraft type, one value per field (chosen by a fixed source priority), with a <code>&lt;field&gt;_source</code> column.</li>
+      <li><a href="downloads/parameters.csv">parameters.csv</a> — every value from every source, one row each (<code>typecode, field, value, unit, source_id, locator, derived, note</code>).</li>
+      <li><a href="downloads/sources.csv">sources.csv</a> — every document cited, with URL, revision, sha256 and licence.</li>
+      <li><a href="downloads/substitutions.csv">substitutions.csv</a> — "type X uses type Y's parameters" statements from OpenAP, Poll–Schumann and our own analysis.</li>
+      <li><a href="downloads/fields.csv">fields.csv</a> — field dictionary with units and source priority.</li>
+    </ul>
+  </div>
+
+  <h2>Browse a type</h2>
+  <div class="explorer">
+    <div>
+      <input type="search" id="q" placeholder="ICAO code or model, e.g. A320" aria-label="Search aircraft types">
+      <div class="typelist" id="typelist" role="listbox"></div>
+    </div>
+    <div class="card" id="detail"><p class="empty">Pick a type on the left.</p></div>
+  </div>
+
+  <h2>Fields and coverage</h2>
+  <p>The bar is the share of types with a recommended value. The point-mass model these fields serve:</p>
+  <p class="mono" style="font-size:.85rem">V̇ = (δ·T_max − D)/m − g·sinγ,&nbsp; D = ½ρV²S·C_D,&nbsp; C_D = C_D0 + k·C_L² (+ gear and flap increments),&nbsp; C_L ≤ C_L,max</p>
+  <div class="card scroll"><table id="fields"></table></div>
+
+  <h2>Sources and licences</h2>
+  <div class="card scroll"><table id="kinds"></table></div>
+  <details style="margin-top:10px"><summary>All cited documents</summary><div class="scroll"><table id="sources"></table></div></details>
+
+  <h2>Read before use</h2>
+  <div class="note"><b>Derived C<sub>L,max</sub>.</b> No public source gives a landing C<sub>L,max</sub>. We compute it from the FAA approach speed at maximum landing weight:
+    V<sub>s</sub> = V<sub>app</sub>/f, C<sub>L,max</sub> = 2mg / (ρ₀ S V<sub>s</sub>²), with f = 1.23 (current certification, V<sub>REF</sub> ≥ 1.23 V<sub>SR</sub>) and f = 1.3 (FAA approach category, 1.3 V<sub>SO</sub>).
+    The IAS is taken as sea-level EAS (no position-error or compressibility correction). This is an approximation.</div>
+  <div class="note"><b>One code, several variants.</b> An ICAO designator often covers several certified models. Sources may describe different variants (for example B763 MTOW 158.7 t vs 186.9 t).
+    <code>recommended.csv</code> picks one value; <code>parameters.csv</code> shows them all.</div>
+  <div class="note"><b>Drag polar coverage.</b> C<sub>D0</sub>, k, e, gear and flap terms come only from OpenAP (37 types). Poll–Schumann's own drag parameters (ψ₀, δ₂, sweep) are listed as <code>ps_*</code> fields and are not converted, because C<sub>D0</sub> = C<sub>f</sub>(Re)·ψ₀ depends on Reynolds number.</div>
+  <div class="note"><b>Not yet collected.</b> Flap deflection angles, V<sub>FE</sub>, V<sub>LE</sub> and V<sub>LO</sub> are defined fields but empty in this release.</div>
+
+  <h3>What is deliberately not here</h3>
+  <ul>
+    <li><b>BADA</b> (EUROCONTROL): its licence makes the datasets and any results derived from them confidential.</li>
+    <li><b>EASA ANP</b>: its terms forbid publication without the data provider's written consent.</li>
+    <li><b>EUROCONTROL Aircraft Performance Database</b>: copyright permission is required.</li>
+    <li><b>Verbatim text</b> from manufacturer documents and books: only the factual value and its page are kept.</li>
+  </ul>
+
+  <footer>
+    <p>Data licence: GPL-3.0 (OpenAP's data licence carries over). Poll–Schumann values: Apache-2.0, see NOTICE. FAA values: US government work. EASA values: reproduced with acknowledgement.</p>
+    <p>Please cite OpenAP (Sun, Hoekstra &amp; Ellerbroek, <i>Aerospace</i> 7(8):104, 2020, doi:10.3390/aerospace7080104) and Poll &amp; Schumann (<i>Aeronaut. J.</i>, doi:10.1017/aer.2024.141) when you use their values.</p>
+  </footer>
+</main>
+
+<script>
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const KIND_LABEL = {us_government:"US government", easa:"EASA", manufacturer:"Manufacturer document", book:"Book",
+  gpl3:"OpenAP (GPL-3.0)", apache2:"Poll–Schumann (Apache-2.0)", derived:"Derived here"};
+
+fetch("data.json").then(r => r.json()).then(D => {
+  const fields = Object.fromEntries(D.fields.map(f => [f.field, f]));
+  const srcById = Object.fromEntries(D.sources.map(s => [s.source_id, s]));
+  const types = Object.keys(D.types);
+  const rec = Object.fromEntries(D.recommended.map(r => [r.typecode, r]));
+  const nValues = types.reduce((n, t) => n + D.types[t].length, 0);
+  const nDrag = D.recommended.filter(r => r.cd0 !== "").length;
+
+  document.getElementById("stats").innerHTML = [
+    [types.length, "aircraft types"], [nValues.toLocaleString(), "values"], [D.sources.length, "sources"],
+    [nDrag, "types with a drag polar"], ["GPL-3.0", "licence"]
+  ].map(([b, s]) => `<div class="stat"><b>${b}</b><span>${s}</span></div>`).join("");
+
+  // fields + coverage
+  const recFields = D.fields.filter(f => f.recommended);
+  document.getElementById("fields").innerHTML =
+    "<tr><th>Field</th><th>Unit</th><th>Description</th><th>Source priority</th><th>Coverage</th></tr>" +
+    recFields.map(f => {
+      const n = D.recommended.filter(r => r[f.field] !== "").length, pct = 100 * n / types.length;
+      return `<tr><td class="mono">${esc(f.field)}</td><td>${esc(f.unit)}</td><td>${esc(f.description)}</td>
+        <td class="src">${f.priority.map(esc).join(" → ") || "—"}</td>
+        <td class="num"><div class="bar"><i style="width:${pct}%"></i></div>${n}</td></tr>`;
+    }).join("");
+
+  // licence kinds
+  const byKind = {};
+  D.sources.forEach(s => (byKind[s.kind] ??= []).push(s));
+  const valuesByKind = {};
+  types.forEach(t => D.types[t].forEach(v => { const k = srcById[v.source_id].kind; valuesByKind[k] = (valuesByKind[k] || 0) + 1; }));
+  document.getElementById("kinds").innerHTML = "<tr><th>Kind</th><th>Documents</th><th>Values</th><th>Licence</th></tr>" +
+    Object.entries(byKind).sort((a, b) => (valuesByKind[b[0]] || 0) - (valuesByKind[a[0]] || 0)).map(([k, ss]) =>
+      `<tr><td>${esc(KIND_LABEL[k] || k)}</td><td class="num">${ss.length}</td><td class="num">${(valuesByKind[k] || 0).toLocaleString()}</td><td class="src">${esc(ss[0].licence)}</td></tr>`).join("");
+  document.getElementById("sources").innerHTML = "<tr><th>Id</th><th>Title</th><th>Publisher</th><th>Revision</th></tr>" +
+    D.sources.map(s => `<tr><td class="mono">${esc(s.source_id)}</td><td>${s.url ? `<a href="${esc(s.url)}" rel="noopener">${esc(s.title)}</a>` : esc(s.title)}</td><td>${esc(s.publisher)}</td><td class="src">${esc(s.revision)}</td></tr>`).join("");
+
+  // explorer
+  const label = t => rec[t].model || rec[t].manufacturer || "";
+  const list = document.getElementById("typelist"), q = document.getElementById("q");
+  let current = null;
+  function renderList() {
+    const s = q.value.trim().toLowerCase();
+    const hit = types.filter(t => !s || t.toLowerCase().includes(s) || label(t).toLowerCase().includes(s));
+    list.innerHTML = hit.slice(0, 400).map(t =>
+      `<button role="option" data-t="${esc(t)}" aria-current="${t === current}"><b>${esc(t)}</b><small>${esc(label(t))}</small></button>`).join("")
+      + (hit.length > 400 ? `<p class="empty" style="padding:8px">${hit.length - 400} more — refine the search.</p>` : "")
+      + (hit.length === 0 ? `<p class="empty" style="padding:8px">No match.</p>` : "");
+  }
+  function show(t) {
+    current = t; renderList();
+    const r = rec[t], all = D.types[t];
+    const rows = recFields.filter(f => r[f.field] !== "").map(f => {
+      const others = all.filter(v => v.field === f.field && v.source_id !== r[f.field + "_source"]);
+      const main = all.find(v => v.field === f.field && v.source_id === r[f.field + "_source"]);
+      const extra = others.length ? `<details><summary>${others.length} other source${others.length > 1 ? "s" : ""}</summary>${
+        others.map(o => `<div class="src">${esc(o.value)} — ${esc(o.source_id)}${o.locator ? ", " + esc(o.locator) : ""}</div>`).join("")}</details>` : "";
+      return `<tr><td class="mono">${esc(f.field)}</td><td class="num">${esc(r[f.field])} ${esc(f.unit)}${main && main.derived === "yes" ? '<span class="pill">derived</span>' : ""}</td>
+        <td class="src">${esc(r[f.field + "_source"])}${main && main.locator ? "<br>" + esc(main.locator) : ""}${main && main.note && main.derived === "yes" ? "<br>" + esc(main.note) : ""}${extra}</td></tr>`;
+    }).join("");
+    const subs = D.substitutions.filter(s => s.typecode === t);
+    const ps = all.filter(v => !fields[v.field].recommended);
+    document.getElementById("detail").innerHTML = `<h3 style="margin-top:0">${esc(t)} <span class="src">${esc(label(t))}</span></h3>
+      <div class="scroll"><table><tr><th>Field</th><th>Value</th><th>Source</th></tr>${rows}</table></div>
+      ${ps.length ? `<p class="src" style="margin-top:10px">Poll–Schumann native: ${ps.map(v => `${esc(v.field)} = ${esc(v.value)}`).join(", ")}</p>` : ""}
+      ${subs.length ? `<p class="src" style="margin-top:10px">Substitutions: ${subs.map(s => `uses <b>${esc(s.substitute)}</b> (${esc(s.origin)})`).join("; ")}</p>` : ""}`;
+  }
+  list.addEventListener("click", e => { const b = e.target.closest("button"); if (b) show(b.dataset.t); });
+  q.addEventListener("input", renderList);
+  show(types.includes("A320") ? "A320" : types[0]);
+}).catch(err => {
+  document.getElementById("stats").innerHTML = `<p class="note">Could not load data.json (${esc(err.message)}). Open the page through a web server, not from the file system.</p>`;
+});
+</script>
+</body>
+</html>

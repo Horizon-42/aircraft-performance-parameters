@@ -1,0 +1,38 @@
+field,unit,group,in_recommended,priority,description
+manufacturer,,identity,yes,faa_acd_2024_10 > openap_2_6_2 > poll_schumann_20250328,Manufacturer
+model,,identity,yes,faa_acd_2024_10 > openap_2_6_2 > poll_schumann_20250328,Model name
+aircraft_class,,identity,yes,faa_acd_2024_10,Fixed-wing / Amphibian / Tiltrotor (FAA ACD)
+propulsion_class,,identity,yes,faa_acd_2024_10,Jet / Turboprop / Piston / Turboshaft (FAA ACD)
+mtow_kg,kg,mass,yes,curated > faa_acd_2024_10 > openap_2_6_2 > poll_schumann_20250328,Maximum take-off weight
+mlw_kg,kg,mass,yes,curated > faa_acd_2024_10 > openap_2_6_2 > poll_schumann_20250328,Maximum (allowable) landing weight
+oew_kg,kg,mass,yes,curated > openap_2_6_2 > poll_schumann_20250328,Operating empty weight
+wing_area_m2,m2,geometry,yes,curated > openap_2_6_2 > poll_schumann_20250328,Wing reference area S
+wing_span_m,m,geometry,yes,faa_acd_2024_10 > openap_2_6_2 > poll_schumann_20250328,Wing span without winglets / sharklets
+wing_span_winglets_m,m,geometry,yes,faa_acd_2024_10,Wing span with winglets / sharklets
+engine_mount,,geometry,yes,openap_2_6_2,Engine mount (wing / rear)
+cd0,,aero_clean,yes,openap_2_6_2,"Zero-lift drag coefficient, clean"
+k,,aero_clean,yes,openap_2_6_2,"Induced drag factor, clean"
+oswald_e,,aero_clean,yes,openap_2_6_2,"Oswald efficiency factor, clean"
+cd0_gear,,aero_landing,yes,openap_2_6_2,Landing gear drag increment
+flap_cf_c,,aero_landing,yes,openap_2_6_2,Flap chord ratio c_f/c
+flap_sf_s,,aero_landing,yes,openap_2_6_2,Flap area ratio S_f/S
+flap_lambda_f,,aero_landing,yes,openap_2_6_2,Flap drag factor lambda_f
+flap_angles_deg,deg,aero_landing,yes,,Flap deflection per setting (not yet collected)
+cl_max_landing_f123,,lift,yes,this_repository,"C_L,max landing, from V_app with V_s = V_app/1.23"
+cl_max_landing_f130,,lift,yes,this_repository,"C_L,max landing, from V_app with V_s = V_app/1.3"
+n_engines,,propulsion,yes,faa_acd_2024_10 > curated > openap_2_6_2 > poll_schumann_20250328,Number of engines
+engine_model,,propulsion,yes,curated > openap_2_6_2,Engine model
+takeoff_thrust_kN_each,kN,propulsion,yes,curated > openap_2_6_2 > poll_schumann_20250328,"Rated static take-off thrust per engine, sea level"
+takeoff_power_kW_each,kW,propulsion,yes,curated,Rated take-off power per engine (propeller aircraft)
+bpr,,propulsion,yes,openap_2_6_2 > poll_schumann_20250328,Bypass ratio
+vmo_kt,kt,speed,yes,openap_2_6_2,Maximum operating speed
+mmo,,speed,yes,openap_2_6_2 > poll_schumann_20250328,Maximum operating Mach number
+vfe_kt,kt,speed,yes,,Maximum flap extended speed per setting (not yet collected)
+vle_kt,kt,speed,yes,,Maximum landing gear extended speed (not yet collected)
+vlo_kt,kt,speed,yes,,Maximum landing gear operating speed (not yet collected)
+approach_speed_kt,kt,speed,yes,faa_acd_2024_10,"Approach speed at MLW, IAS (FAA ACD)"
+approach_speed_min_kt,kt,speed,yes,faa_acd_2024_10,"Approach speed, minimum of the FAA range"
+approach_speed_max_kt,kt,speed,yes,faa_acd_2024_10,"Approach speed, maximum of the FAA range"
+ps_psi0,,ps_native,no,,Poll-Schumann zero-lift drag factor psi_0 (C_D0 = C_f(Re) psi_0)
+ps_delta2,,ps_native,no,,Poll-Schumann lift-dependent drag parameter delta_2
+ps_cos_sweep,,ps_native,no,,Poll-Schumann cosine of wing sweep
