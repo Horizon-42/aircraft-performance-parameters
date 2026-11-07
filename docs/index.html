@@ -86,8 +86,25 @@ footer { margin-top: 56px; color: var(--muted); font-size: .88rem; border-top: 1
   </div>
 
   <h2>Fields and coverage</h2>
-  <p>The bar is the share of types with a recommended value. The point-mass model these fields serve:</p>
-  <p class="mono" style="font-size:.85rem">V̇ = (δ·T_max − D)/m − g·sinγ,&nbsp; D = ½ρV²S·C_D,&nbsp; C_D = C_D0 + k·C_L² (+ gear and flap increments),&nbsp; C_L ≤ C_L,max</p>
+  <h3>What the fields are for</h3>
+  <p>The fields are the per-type inputs of a point-mass performance model. The model treats the aircraft as one
+    mass moving along its flight path. Its speed changes with thrust, drag and gravity:</p>
+  <p class="mono" style="font-size:.85rem">V̇ = (δ·T_max − D) / m − g·sin γ<br>
+    D = ½ ρ V² S · C_D,&nbsp;&nbsp; C_D = C_D0 + k · C_L² (+ gear and flap terms),&nbsp;&nbsp; C_L ≤ C_L,max</p>
+  <ul class="tight">
+    <li><b>m</b> (mass): <code>mlw_kg</code>, <code>mtow_kg</code>, <code>oew_kg</code></li>
+    <li><b>S</b> (wing area): <code>wing_area_m2</code></li>
+    <li><b>C_D0, k</b> (drag polar) and the gear and flap terms: <code>cd0</code>, <code>k</code>, <code>cd0_gear</code>, <code>flap_*</code></li>
+    <li><b>C_L,max</b> (stall limit): <code>cl_max_landing_*</code></li>
+    <li><b>T_max</b> (maximum thrust; δ is the throttle setting, 0 to 1): <code>n_engines</code> × <code>takeoff_thrust_kN_each</code></li>
+    <li>V is the airspeed, γ the flight-path angle, ρ the air density, g gravity. The speed fields (<code>vmo_kt</code>, <code>approach_speed_kt</code>, …) give speed limits and targets.</li>
+  </ul>
+  <h3>How to read the table</h3>
+  <ul class="tight">
+    <li><b>Source priority</b>: the order in which sources are tried for <code>recommended.csv</code>. The first source that has a value for the type wins. "curated" means a value read by hand from a type-certificate data sheet or a manufacturer document.</li>
+    <li><b>Types with a value</b>: how many of the <span class="ntypes">all</span> types have this field in <code>recommended.csv</code>. The bar shows the same number as a share of all types. Example: a full bar means every type has the field; an empty bar means no type has it yet.</li>
+  </ul>
+  <p></p>
   <div class="card scroll"><table id="fields"></table></div>
 
   <h2>Sources and licences</h2>
@@ -136,9 +153,10 @@ fetch("data.json").then(r => r.json()).then(D => {
   ].map(([b, s]) => `<div class="stat"><b>${b}</b><span>${s}</span></div>`).join("");
 
   // fields + coverage
+  document.querySelectorAll(".ntypes").forEach(e => e.textContent = types.length);
   const recFields = D.fields.filter(f => f.recommended);
   document.getElementById("fields").innerHTML =
-    "<tr><th>Field</th><th>Unit</th><th>Description</th><th>Source priority</th><th>Coverage</th></tr>" +
+    "<tr><th>Field</th><th>Unit</th><th>Description</th><th>Source priority</th><th>Types with a value</th></tr>" +
     recFields.map(f => {
       const n = D.recommended.filter(r => r[f.field] !== "").length, pct = 100 * n / types.length;
       return `<tr><td class="mono">${esc(f.field)}</td><td>${esc(f.unit)}</td><td>${esc(f.description)}</td>
